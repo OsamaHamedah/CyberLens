@@ -1,5 +1,6 @@
 <?php
-//Personal note: This is the presentation layer".
+//Note: This is not the presentation layer,
+// this is for testing database connection only.
 include 'config/db_connection.php';
 
 echo "<h1>Cyber Lens Project</h1>";

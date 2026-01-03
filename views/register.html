@@ -1,19 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<!--This is the presentation Layer
+I've built it in HTML and implemented CSS for styling and finishing,
+and JavaScript for making the web interactive and dynamic-->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register | Cyber Lens</title>
     <style>
         body {
-/*There's a lot of comments in the CSS code
-because I'd change & edit in styling in the future
-in order to maintain the best possible outcome of the
-UX in the frontend implementation */
+/*There are many comments in the CSS code
+because I might edit the styling in the future
+in order to maintain the best possible UX outcome
+in the frontend implementation */
 
             font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
             background-color: #1a1a2e; /*333335b Midnight blue*/
-            color: white; /*or Platinum: #e4e4e2*/
+            color: white; /* or Platinum: #e4e4e2*/
             display: flex; /* display: flex-start;*/
             justify-content: center;
             align-items: center;
@@ -33,12 +36,64 @@ UX in the frontend implementation */
             border: 1px solid #efc07b;
 
         }
-
-
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #efc07b;
+            box-sizing: border-box;
+        }
+        .error-msg {
+            color: red;
+            font-size: 0.9em;
+            display: none;
+            margin-bottom: 10px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #e94560;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
 
     </style>
+
 </head>
 <body>
+<div class="container">
+    <h2>Join Cyber Lens</h2>
+    <div id="error-message" class="error-msg"></div>
+    <form action="../controllers/register.php" method="post" onsubmit="return validateForm()">
+        <input type="text" name="full_name" placeholder="Full Name" required aria-label="Full Name">
+        <input type="email" name="email" placeholder="Email Address" required aria-label="Email Address">
+        <input type="password" name="password" id="password" placeholder="Password" required aria-label="Password">
+        <input type="password" id="confirm_password" placeholder="Confirm Password" required aria-label="Confirm Password">
 
+        <button type="submit" name="register_btn">Sign Up</button>
+    </form>
+    <div class="footer-link">
+        Already have an account? <a href="login.html">Login</a>
+    </div>
+</div>
+
+<script>
+    function validateForm() {
+        const password = document.getElementById("password").value;
+        const confirmPassword = document.getElementById("confirm_password").value;
+        const errorDiv = document.getElementById("error-message");
+
+        if (password !== confirmPassword) {
+            errorDiv.style.display = "block";
+            errorDiv.innerText = "Error: Passwords do not match";
+            return false;
+        } else {
+            return true;
+        }
+    }
+</script>
 </body>
 </html>
