@@ -1,12 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Login Coming Soon.</title>
-    <!--
     <meta charset="UTF-8">
-    <title>Title</title> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Cyber Lens</title>
+
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 
+<div class="container">
+    <h2>Login to Cyber Lens</h2>
+    <form action="../controllers/login.php" method="post">
+        <input type="email" name="email" placeholder="Email Address" required aria-label="Email Address">
+        <input type="password" name="password" placeholder="Password" required aria-label="Password">
+
+        <button type="submit" name="login_btn">Login</button>
+    </form>
+    <div class="footer-link">
+        Don't have an account? <a href="register.html">Sign Up</a>
+    </div>
+</div>
 </body>
 </html>

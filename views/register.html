@@ -7,61 +7,7 @@ and JavaScript for making the web interactive and dynamic-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register | Cyber Lens</title>
-    <style>
-        body {
-/*There are many comments in the CSS code
-because I might edit the styling in the future
-in order to maintain the best possible UX outcome
-in the frontend implementation */
-
-            font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #1a1a2e; /*333335b Midnight blue*/
-            color: white; /* or Platinum: #e4e4e2*/
-            display: flex; /* display: flex-start;*/
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-
-        }
-
-        .container {
-            background-color: #1b2a4e; /*darker: #16213e*/
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5); /*alternative: box-shadow: 0 0px 10px rgba(15,52,96,0.3);*/
-            width: 350px;
-            text-align: center;
-            /*margin: 0 auto;*/
-            border: 1px solid #efc07b;
-
-        }
-        input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #efc07b;
-            box-sizing: border-box;
-        }
-        .error-msg {
-            color: red;
-            font-size: 0.9em;
-            display: none;
-            margin-bottom: 10px;
-        }
-        button {
-            width: 100%;
-            padding: 12px;
-            background-color: #e94560;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-    </style>
-
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 <div class="container">
@@ -80,20 +26,6 @@ in the frontend implementation */
     </div>
 </div>
 
-<script>
-    function validateForm() {
-        const password = document.getElementById("password").value;
-        const confirmPassword = document.getElementById("confirm_password").value;
-        const errorDiv = document.getElementById("error-message");
-
-        if (password !== confirmPassword) {
-            errorDiv.style.display = "block";
-            errorDiv.innerText = "Error: Passwords do not match";
-            return false;
-        } else {
-            return true;
-        }
-    }
-</script>
+<script src="../js/script.js"></script>
 </body>
 </html>

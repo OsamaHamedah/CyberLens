@@ -1,5 +1,5 @@
 <?php
-//this is the Application Layer
+//this is the Application Layer for the registration
 //also the data access layer (that will communicate with the database)
 require '../config/db_connection.php';
 /** * @var mysqli $conn */
