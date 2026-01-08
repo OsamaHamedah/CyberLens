@@ -86,7 +86,7 @@ $role = isset($_SESSION['user_role']) ? $_SESSION['user_role'] : 'guest';
             border-radius: 5px;
         }
         .container {
-            width: 600px;
+            width : 600px;
             margin : 80px auto ;
             text-align: center;
         }
@@ -110,12 +110,54 @@ $role = isset($_SESSION['user_role']) ? $_SESSION['user_role'] : 'guest';
 <div class="container" style="margin: 15vh auto; width: 80%; max-width: 1200px;">
     <h1>Dashboard</h1>
     <p>Current Access Level: <strong style="color: #efc07b;"><?php echo ucfirst($role); ?></strong></p>
-
     <div id="live-threat-dashboard" style="margin-top: 40px; border: 1px dashed #efc07b; padding: 30px; border-radius: 10px;">
-        <h3>🔴 Live Threat Intelligence </h3>
-        <p>Loading API data...</p>
+        <div style="display:flex; justify-content:space-between; align-items: center; margin-bottom: 20px;">
+        <h3 style="margin:0; color:#fff;">🔴 Live Threat Intelligence</h3>
+            <span style="font-size: 0.8em; color: gray;">Source: CIRCL CVE Feed | Updates Hourly</span>
+        </div>
+        <h4 style="color: #efc07b; margin-top: 0; font-weight: normal; font-size: 1rem;">Top 5 Vulnerabilities Of The Week:</h4>
+        <!--Note:
+        Vulnerability is the weakness just like bug or loophole
+        Threat is the possible cause of the harm like malware or script
+        -->
+        <div id="threat-container" style ="display:flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
+            <p style="color: #efc07b;">Connecting to API...</p>
+        </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        fetch('controllers/feed.php')
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('threat-container');
+                container.innerHTML = '';
+
+                if (data.length === 0) {
+                    container.innerHTML = '<p style="color: #ff4d4d;">Unable to load vulnerability feed.</p>';
+                return;
+                }
+
+                data.forEach(cve => {const card = document.createElement('div');
+                    card.setAttribute("style", "background : #162447; border: 1px solid #1f4068; padding: 15px; border-radius: 8px; width: 18%; min-width: 200px; text-align: left; box-shadow: 0 4px 6px rgba(0,0,0,0.3);");
+                    //card.style.cssText = "background : #162447; border: 1px solid #1f4068; padding: 15px; border-radius: 8px; width: 18%; min-width: 200px; text-align: left; box-shadow: 0 4px 6px rgba(0,0,0,0.3);";
+                //false positive warning
+                let summary = cve['summary'] ? cve['summary'].substring(0,85) + "..." : "No details available.";
+                card.innerHTML =`<strong style="color: #e94560; font-size: 0.95em; display: block; margin-bottom: 5px;">${cve['id']}</strong>
+                    <span style="color: #efc07b; font-size: 0.75em; background: #1a1a2e; padding: 2px 6px; border-radius: 4px;">Modified: ${cve['Modified'].substring(0,10)}</span>
+                    <p style="color: #ddd; font-size: 0.8em; line-height: 1.4; margin-top: 10px;">${summary}</p>
+                        `;
+                    container.appendChild(card);
+                });
+            })
+
+    .catch(error => {
+    console.error('Error:', error);
+    document.getElementById('threat-container').innerHTML = '<p style="color: #ff4d4d;">System Error: Feed unreachable.</p>';
+    });
+});
+</script>
 </body>
 </html>
 
