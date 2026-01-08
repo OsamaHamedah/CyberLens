@@ -53,3 +53,21 @@ button {
     cursor: pointer;
     margin-top: 10px;
 }
+.guest-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    margin-top: 15px;
+    color: #efc07b;
+    border: 1px solid #efc07b;
+    text-decoration: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+
+}
+.guest-btn:hover {
+    background-color: rgba(239, 192, 123, 0.3);
+    color: #fff;
+}
