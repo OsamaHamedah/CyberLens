@@ -60,12 +60,12 @@ $role = isset($_SESSION['user_role']) ? $_SESSION['user_role'] : 'guest';
 <div class="main-wrapper">
     <h1>Dashboard</h1>
     <p>Current Access Level: <strong style="color: #efc07b;"><?php echo ucfirst($role); ?></strong></p>
-    <div id="live-threat-dashboard" style="margin-top: 40px; border: 1px dashed #efc07b; padding: 30px; border-radius: 10px;">
+    <div id="live-threat-dashboard" class = "api_container">
         <div style="display:flex; justify-content:space-between; align-items: center; margin-bottom: 20px;">
         <h3 style="margin:0; color:#fff;">🔴 Live Threat Intelligence</h3>
             <span style="font-size: 0.8em; color: gray;">Source: CIRCL CVE Feed | Updates Hourly</span>
         </div>
-        <h4 style="color: #efc07b; margin-top: 0; font-weight: normal; font-size: 1rem;">Top 5 Vulnerabilities Of The Week:</h4>
+        <h4 style="color: #efc07b; margin-top: 0; font-weight: normal; font-size: 1rem;">Top 5 Trending Vulnerabilities (Live)</h4>
         <!--Note:
         Vulnerability is the weakness just like bug or loophole
         Threat is the possible cause of the harm like malware or script

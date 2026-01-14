@@ -223,3 +223,24 @@ body {
 .badge-low {
     background-color: #54a0ff;
 }
+
+.api_container{
+    margin-top: 40px;
+    background-color: #16213e;
+    border: 1px solid #efc07b;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.centered-body {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    height: 100vh !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background-color: #1a1a2e;
+}
