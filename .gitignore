@@ -1,2 +1,2 @@
 .idea/
-controllers/db_connection.php
+config/db_connection.php
