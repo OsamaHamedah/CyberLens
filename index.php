@@ -60,6 +60,24 @@ $role = isset($_SESSION['user_role']) ? $_SESSION['user_role'] : 'guest';
 <div class="main-wrapper">
     <h1>Dashboard</h1>
     <p>Current Access Level: <strong style="color: #efc07b;"><?php echo ucfirst($role); ?></strong></p>
+
+    <!--upload research feature -->
+    <div style="margin: 20px 0; text-align: right;">
+        <?php if($role !=='guest'): ?>
+        <!-- button is accessible by registered users only -->
+        <a href="views/upload_research.php" class="guest-btn" style="background-color: #e94560; color: white; border-color: #efc07b;">
+            + Upload New Research
+        </a>
+        
+        <?php else: ?>
+    <!-- This one is for the guest users (CTA) -->
+    <span style="color: #ccc; margin-right: 10px;">Want to contribute?</span>
+    <a href="views/register.html" class="guest-btn" style="background-color: #e94560; color: white; border-color: #efc07b;">
+        Join Our Community!
+    </a>
+    <?php endif; ?>
+    </div>
+
     <div id="live-threat-dashboard" class = "api_container">
         <div style="display:flex; justify-content:space-between; align-items: center; margin-bottom: 20px;">
         <h3 style="margin:0; color:#fff;">🔴 Live Threat Intelligence</h3>

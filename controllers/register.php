@@ -22,8 +22,18 @@ if (isset($_POST['register_btn'])) {
 VALUES ('$full_name', '$email', '$hashed_password', 'user')";
         if ($conn->query($sql) === TRUE) {
             //echo "<script>alert('User registered successfully');";
+            //echo "<script> alert('Account Created Successfully');
+            //window.location.href='../index.php';</script>";
+
+            $new_user_id = $conn->insert_id;
+            session_start();
+            $_SESSION['auth'] = TRUE;
+            $_SESSION['user_id'] = $new_user_id;
+            $_SESSION['username'] = $full_name;
+            $_SESSION['user_role'] = 'user';
             echo "<script> alert('Account Created Successfully');
-            window.location.href='../index.php';</script>";
+        window.location.href='../index.php';</script>";
+
         }
             else {
                 echo "Error: " . $sql . "<br>" . $conn->error;

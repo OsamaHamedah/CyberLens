@@ -20,7 +20,7 @@ if (isset($_POST['login_btn'])) {
 
         if (password_verify($password, $hashed_password_from_db)) {
             $_SESSION['auth'] = TRUE;
-            $_SESSION['user_id'] = $row['id'];
+            $_SESSION['user_id'] = $row['user_id'];
             $_SESSION['user_name'] = $row['full_name'];
             $_SESSION['user_role'] = $row['role'];
 
