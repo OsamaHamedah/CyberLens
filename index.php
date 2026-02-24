@@ -68,7 +68,7 @@ $role = isset($_SESSION['user_role']) ? $_SESSION['user_role'] : 'guest';
         <a href="views/upload_research.php" class="guest-btn" style="background-color: #e94560; color: white; border-color: #efc07b;">
             + Upload New Research
         </a>
-        
+
         <?php else: ?>
     <!-- This one is for the guest users (CTA) -->
     <span style="color: #ccc; margin-right: 10px;">Want to contribute?</span>
