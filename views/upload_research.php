@@ -50,10 +50,23 @@ if (!isset($_SESSION['auth']) || $_SESSION['auth'] !==true) {
                 <option value="XSS">❌ XSS</option>
                 <option value="other">❓ Other</option>
             </select>
+
+        <label class="form-label">Severity Level:</label>
+        <select name="severity" required>
+            <option value="" selected disabled>Select Severity Level</option>
+            <option value="Critical" style="color: #e74c3c;">🔴 Critical</option>
+            <option value="High" style="color: #e67e22;">🟠 High</option>
+            <option value="Medium" style="color: #f1c40f;">🟡 Medium</option>
+            <option value="Low" style="color: #2ecc71;">🟢 Low</option>
+        </select>
+
+        <label class="form-label">Title:</label>
         <input type="text" name="title" placeholder="Research Title" required>
 
+        <label class="form-label">Description:</label>
         <textarea name="description" placeholder="Research Description" rows="3" required></textarea>
 
+        <label class="form-label">Research Full Details:</label>
         <textarea name="content" placeholder="Research Content & Details" rows="10" required></textarea>
 
         <label style="color: #ccc; display: flex; align-items: center; gap: 10px; margin: 10px 0">
@@ -61,8 +74,11 @@ if (!isset($_SESSION['auth']) || $_SESSION['auth'] !==true) {
             This is an IEEE Academic Citation
         </label>
 
-        <button type="submit" name="upload_btn" style="background-color: #e94560; color: white;">Upload Research</button>
-        <a href="../index.php" class="guest-btn" style="text-align: center; display: block; margin-top: 10px;">Cancel</a>
+        <button type="submit" name="upload_btn" style="background-color: #e94560; color: white; padding: 12px;
+            border: none; width: 100%; border-radius:: 5px; font-weight:bold; cursor: pointer; transition: 0.3s;">
+            Upload Research</button>
+        <a href="../index.php" class="guest-btn" style="text-align: center; display: block; margin-top: 15px;
+            color: #aaa; text-decoration: none;">Cancel</a>
     </form>
 </div>
 </body>
