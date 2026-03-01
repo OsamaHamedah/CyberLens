@@ -48,7 +48,11 @@ if (!isset($_SESSION['auth']) || $_SESSION['auth'] !==true) {
                 <option value="Dos">🧟 Denial-of-Service</option>
                 <option value="SQLi">💉 SQL Injection</option>
                 <option value="XSS">❌ XSS</option>
-                <option value="other">❓ Other</option>
+                <!-- <option value="other">❓ Other</option>  This was a temporary solution -->
+                <option value="MITM">🕵️ Man-In-The-Middle</option>
+                <option value="Password">🔑 Password Attacks</option>
+                <option value="SupplyChain">⛓️ Supply Chain Attacks</option>
+                <option value="ZeroDay">💣 Zero-Day Exploits</option>
             </select>
 
         <label class="form-label">Severity Level:</label>
