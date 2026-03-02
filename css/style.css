@@ -245,4 +245,77 @@ body {
     background-color: #1a1a2e;
 }
 
-/* The following is the styling for the category_feed  */
+/* Due to possible contradictions, the styling for the category_feed is internally implemented */
+
+/* The following styling is for the research reading feature */
+.paper-container {
+    max-width: 800px;
+    margin: 40px auto;
+    background: #162447;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    border: 1px solid #1f4068;
+}
+
+.paper-header {
+    border-bottom: 2px solid #e94560;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+.paper-title {
+    margin: 0 0 10px 0;
+    color: #e94560;
+    font-size: 2em;
+    line-height: 1.2;
+}
+
+.meta-info {
+    color: #888;
+    font-size: 0.9em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.content-body {
+    line-height: 1.8;
+    color: #888;
+    font-size: 1.1em;
+    white-space: pre-wrap;
+    font-family: 'segoe ui', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.back-nav {
+    margin-bottom: 20px;
+
+}
+
+.back-link {
+    color: #efc07b;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.back-link:hover {
+    color: #efc07b;
+    text-decoration: underline;
+}
+
+.ieee-citation {
+    margin-top: 10px;
+    color: #3498db;
+    font-size: 0.9em;
+    font-style: italic;
+}
+
+.footer-nav {
+    margin-top: 50px;
+    border-top: 1px solid #1f4068;
+    padding-top: 20px;
+    text-align: center;
+}

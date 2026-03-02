@@ -75,7 +75,7 @@ Uploaded by <?php echo htmlspecialchars($row['full_name']); ?> •
 <p class ="desc">
     <?php echo nl2br(htmlspecialchars($row['description'])); ?>
 </p>
-<a href ="#" class="read-btn">Read Full Paper</a>
+<a href ="read_research.php?id=<?php echo $row['research_id']; ?>" class="read-btn">Read Full Paper</a>
 </div>
 <?php endwhile; ?>
 <?php else: ?>
