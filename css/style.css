@@ -319,3 +319,69 @@ body {
     padding-top: 20px;
     text-align: center;
 }
+
+
+/* -Research Paper - Comment Section Styling */
+.comment-section {
+    margin-top: 50px;
+    border-top: 1px solid #1f4068;
+    padding-top: 30px;
+}
+
+.comment-box {
+    background: #162447;
+    border: 1px solid #1f4068;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+    color: #efc07b;
+}
+
+.comment-text {
+    color: #dcdcdc;
+    line-height: 1.5;
+}
+
+.reply-box {
+    margin-left: 50px;
+    background: #1a1a2e;
+    border-left: 3px solid #e94560;
+    padding: 15px;
+    margin-top: 10px;
+    border-radius: 0 8px 8px 0;
+}
+
+.reply-btn {
+    background: transparent;
+    border: none;
+    color: #3498db;
+    cursor: pointer;
+    font-size: 0.85em;
+    margin-top: 10px;
+
+}
+.reply-btn:hover {
+    text-decoration: underline;
+}
+
+.reply-from-container {
+    display: none;
+    margin-top: 10px;
+    margin-bottom: 20px;
+ }
+
+.textarea.comment-input {
+    width: 100%;
+    background: #0f3460;
+    border: 1px solid #1f4068;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}

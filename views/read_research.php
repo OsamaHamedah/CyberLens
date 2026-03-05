@@ -24,6 +24,25 @@ if(!$paper) {
     echo "<h2 style='color: white; text-align: center; margin-top: 50px;'>Research not found.</h2>";
     exit();
 }
+
+$comment_sql= "SELECT comments.*, users.full_name FROM comments JOIN users ON comments.user_id = users.user_id WHERE research_id = ? ORDER BY created_at ASC";
+
+$c_stmt = $conn->prepare($comment_sql);
+$c_stmt->bind_param("i", $id);
+$c_stmt->execute();
+$comments_result = $c_stmt->get_result();
+
+$comments = [];
+$replies = [];
+
+while ($row = $comments_result->fetch_assoc()) {
+    if($row['parent_id'] === NULL) {
+        $comments[]= $row; // as a top level comment
+    } else {
+        $replies[$row['parent_id']][]= $row;
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -63,6 +82,10 @@ if(!$paper) {
     <div class="content-body">
         <?php echo nl2br(htmlspecialchars($paper['content'])); ?>
     </div>
+
+<div class ="comments-section" id="comments">
+    <h3>Discussion (<?php echo $comments_result->num_rows; ?></h3>
+</div>
 
 <div class="footer-nav">
 <a href="../index.php" class="back-link" style="color: #888;">Return to Dashboard</a>
