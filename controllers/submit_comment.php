@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     /**  @var mysqli $conn to avoid possible error I faced since I'm using IntelliJ Idea Ultimate */
     if (!empty($comment_text)) {
         $stmt = $conn->prepare("INSERT INTO comments (research_id, user_id, parent_id, comment_text) VALUES (?,?,?,?)");
-        $stmt->bind_param("isss", $research_id, $user_id, $parent_id, $comment_text);
+        $stmt->bind_param("iiis", $research_id, $user_id, $parent_id, $comment_text);
 
         if ($stmt->execute()) {
             header("location: ../views/read_research.php?id=" . $research_id . "#comments");

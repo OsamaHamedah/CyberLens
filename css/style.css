@@ -322,7 +322,7 @@ body {
 
 
 /* -Research Paper - Comment Section Styling */
-.comment-section {
+.comments-section {
     margin-top: 50px;
     border-top: 1px solid #1f4068;
     padding-top: 30px;
@@ -333,6 +333,7 @@ body {
     border: 1px solid #1f4068;
     border-radius: 8px;
     margin-bottom: 20px;
+    padding: 20px; //added this so the text wont hit the border
 }
 
 .comment-header {
@@ -370,13 +371,13 @@ body {
     text-decoration: underline;
 }
 
-.reply-from-container {
+.reply-form-container {
     display: none;
     margin-top: 10px;
     margin-bottom: 20px;
  }
 
-.textarea.comment-input {
+textarea.comment-input {
     width: 100%;
     background: #0f3460;
     border: 1px solid #1f4068;

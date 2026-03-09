@@ -13,6 +13,7 @@ if ($id == 0) {
     exit();
 }
 
+//fetch the research
 $sql= "SELECT research.*, users.full_name FROM research JOIN users ON research.user_id = users.user_id WHERE research.research_id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $id);
@@ -25,6 +26,7 @@ if(!$paper) {
     exit();
 }
 
+//fetch the comments
 $comment_sql= "SELECT comments.*, users.full_name FROM comments JOIN users ON comments.user_id = users.user_id WHERE research_id = ? ORDER BY created_at ASC";
 
 $c_stmt = $conn->prepare($comment_sql);
@@ -39,7 +41,7 @@ while ($row = $comments_result->fetch_assoc()) {
     if($row['parent_id'] === NULL) {
         $comments[]= $row; // as a top level comment
     } else {
-        $replies[$row['parent_id']][]= $row;
+        $replies[$row['parent_id']][]= $row; //reply
     }
 }
 
@@ -84,13 +86,79 @@ while ($row = $comments_result->fetch_assoc()) {
     </div>
 
 <div class ="comments-section" id="comments">
-    <h3>Discussion (<?php echo $comments_result->num_rows; ?></h3>
+    <h3>Discussion (<?php echo $comments_result->num_rows; ?>)</h3>
+
+    <?php if(isset($_SESSION['auth']) && $_SESSION['auth'] === true): ?>
+    <form action="../controllers/submit_comment.php" method="POST" style="margin-bottom: 30px;">
+        <input type="hidden" name="research_id" value="<?php echo $id; ?>">
+        <textarea name="comment_text" class="comment-input" rows="3" placeholder="Add to Comments..." required></textarea>
+        <button type="submit" class="read-btn">Post Comment</button>
+    </form>
+    <?php else: ?>
+    <p style="color: #888; margin-bottom: 20px;">
+        <a href="login.html" style="color: #e94560;">Login</a> to join the discussion.
+    </p>
+    <?php endif; ?>
+
+    <?php foreach($comments as $comment): ?>
+    <div class="comment-box">
+        <div class="comment-header">
+            <strong><?php echo htmlspecialchars($comment['full_name']); ?></strong>
+            <span><?php echo date('M d, H:i', strtotime($comment['created_at'])); ?></span>
+    </div>
+        <div class="comment-text">
+            <?php echo nl2br(htmlspecialchars($comment['comment_text'])); ?>
+        </div>
+
+        <?php if(isset($_SESSION['auth'])): ?>
+        <button class="reply-btn" onclick="toggleReply('reply-form-<?php echo $comment['comment_id']; ?>')">↩ Reply</button>
+
+        <div id="reply-form-<?php echo $comment['comment_id']; ?>" class="reply-form-container" style="display: none;">
+            <form action="../controllers/submit_comment.php" method="POST">
+                <input type="hidden" name="research_id" value="<?php echo $id; ?>">
+                <input type="hidden" name="parent_id" value="<?php echo $comment['comment_id']; ?>">
+                <textarea name="comment_text" class="comment-input" rows="2" placeholder="Reply to <?php echo htmlspecialchars($comment['full_name']); ?>..." required></textarea>
+                <button type="submit" class="reply-btn" style="font-size: 0.8em; padding: 5px 15px;">Post Reply</button>
+            </form>
+        </div>
+        <?php endif; ?>
+
+        <?php if(isset($replies[$comment['comment_id']])): ?>
+        <?php foreach ($replies[$comment['comment_id']] as $reply): ?>
+        <div class="reply-box">
+            <div class="comment-header">
+                <strong><?php echo htmlspecialchars($reply['full_name']); ?></strong>
+                <span><?php echo date('M d,H:i', strtotime($reply['created_at'])); ?></span>
+            </div>
+            <div class="comment-text">
+                <?php echo nl2br(htmlspecialchars($reply['comment_text'])); ?>
+            </div>
+</div>
+       <?php endforeach; ?>
+        <?php endif; ?>
+    </div>
+    <?php endforeach;?>
+
+    <?php if(count($comments) === 0): ?>
+    <p style="color: #888; text-align: center;">No Comments yet. Be the first to share your thoughts!</p>
+    <?php endif; ?>
 </div>
 
 <div class="footer-nav">
 <a href="../index.php" class="back-link" style="color: #888;">Return to Dashboard</a>
 </div>
+    </div>
 
+<script>
+    function toggleReply(id) {
+        var x= document.getElementById(id);
+        if (x.style.display=== 'none' || x.style.display === "") {
+            x.style.display = 'block';
+        } else {
+            x.style.display = 'none';
+        }
+    }
+</script>
 
 </body>
 </html>
