@@ -5,23 +5,37 @@ ini_set('display_errors', 0);
 
 $cacheFile= '../cache/threats.json';
 $cacheTime= 3600;
-
+$maxCacheSize = 5 * 1024 * 1024; /* Because the threats.json file is getting bigger and bigger
+                                    (currently 14.86MB) and errors in the API retrieving
+                                    started to occur such as stuck in pending status. */
 if (!is_dir('../cache')) {
     mkdir('../cache', 0777, true);
 }
 $data= [];
 
-if (file_exists($cacheFile) && (time()- filemtime($cacheFile)< $cacheTime)) {
+/*if (file_exists($cacheFile) && (time()- filemtime($cacheFile)< $cacheTime))*/
+if (file_exists($cacheFile) && (time()- filemtime($cacheFile)< $cacheTime) && filesize($cacheFile)< $maxCacheSize) {
     $raw_data = file_get_contents($cacheFile);
     $data= json_decode($raw_data, true);
+
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        unlink($cacheFile);
+        $data= [];
+    }
 }
 else{
+    if(file_exists($cacheFile)){
+        unlink($cacheFile);
+    }
+
     $api_url= "https://cve.circl.lu/api/last";
 
     $ch= curl_init();
     curl_setopt($ch, CURLOPT_URL, $api_url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_USERAGENT, 'CyberLens_StudentProject');
+    curl_setopt($ch, CURLOPT_TIMEOUT, 10); //10 seconds timeout
+    // to prevent what I faced recently (hanging on "loading API" expecting it to work)
 
     $response = curl_exec($ch);
     $httpCode= curl_getinfo($ch, CURLINFO_HTTP_CODE);

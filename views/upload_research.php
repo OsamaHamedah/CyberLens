@@ -23,6 +23,10 @@ if (!isset($_SESSION['auth']) || $_SESSION['auth'] !==true) {
             border: 1px solid #16213e;
             color : #fff;
             border-radius: 5px;
+            /* added the following to improve the textboxes and align them with the other boxes
+            ( Improving the UX) */
+            resize: vertical;
+            box-sizing: border-box;
         }
         .upload-form select {
             width: 100%;
@@ -35,8 +39,12 @@ if (!isset($_SESSION['auth']) || $_SESSION['auth'] !==true) {
         }
     </style>
     </head>
-<body class="centered-body">
-<div class="container">
+
+<!-- <body class="centered-body"> Note: the "Upload Cyber Research" interface seemed to stretch
+                                  & title not visible if the browser zoom is set to (80% +)
+                                  so in short, this fix is to tweak the UI & improve the UX-->
+<body style="background-color: #1a1a2e; color: #fff; padding: 40px 20px; min-height: 100vh; display: flex; justify-content: center;">
+<div class="container" style="margin: 0 auto;">
     <h2 style="color: #e94560;">Upload Cyber Research</h2>
 
     <form action="../controllers/upload_research.php" method="post" class ="upload-form">

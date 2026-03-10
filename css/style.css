@@ -329,7 +329,8 @@ body {
 }
 
 .comment-box {
-    background: #162447;
+    /* background: #162447 */
+    background: #0f3460;
     border: 1px solid #1f4068;
     border-radius: 8px;
     margin-bottom: 20px;
@@ -385,4 +386,6 @@ textarea.comment-input {
     padding: 10px;
     border-radius: 5px;
     margin-bottom: 10px;
+    font-family: inherit;
+    box-sizing: border-box;
 }
