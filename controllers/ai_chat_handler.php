@@ -5,6 +5,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start(); // I don't need to start the session everytime because I'm including db_connection which has the session_start() but I just do it just in case.
 }
 include("../config/db_connection.php");
+include("../config/ai_keys.php");
 
 header('Content-Type: application/json');
 
@@ -27,12 +28,16 @@ if ($userId) {
     $stmt->bind_param('is', $userId, $userMessage);
     $stmt->execute();
 }
+$apiUrl = "https://api.groq.com/openai/v1/chat/completions";
 //***3. Call Hugging Face API (model: Mistral-7B-Instruct) https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.2
 //$apiUrl = "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.3";
 //$apiUrl = "https://api-inference.huggingface.co/models/google/gemma-7b-it";
 //$apiUrl = "https://api-inference.huggingface.co/models/microsoft/Phi-3-mini-4k-instruct";
-$apiUrl="https://api-inference.huggingface.co/models/tiiuae/falcon-7b-instruct";
-$authHeader = "Authorization: Bearer " . trim(HUGGINGFACE_API_KEY);
+//$apiUrl="https://api-inference.huggingface.co/models/tiiuae/falcon-7b-instruct";
+//$apiUrl = "https://router.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.2";
+//$apiUrl = "https://router.huggingface.co/hf-inference/models/mistralai/Mistral-7B-Instruct-v0.2";
+//$apiUrl = "https://router.huggingface.co/v1/chat/completions";
+
 
 /* curl_setopt($ch, CURLOPT_HTTPHEADER, [
     'Content-Type: application/json',
@@ -45,24 +50,41 @@ $prompt = "You are Kali, an elite cybersecurity AI assistant. Be technical and c
 
 
 $data = [
+    "model" => "llama-3.1-8b-instant",
+    "messages" => [
+        ["role" => "system", "content" => "You are CyberBot, an elite cybersecurity AI assistant. Be technical and concise. Match the user's energy"],
+        ["role" => "user", "content" => $userMessage],
+    ],
+    "max_tokens" => 250,
+    "temperature" => 0.7
+];
+
+/* $data = [
    'inputs' => $prompt,
     'parameters' => [
         'max_new_tokens' => 250,
         'temperature' => 0.7,
         'return_full_text' => false, //just the latest/new answer
     ]
-];
+]; */
+
 //initialize cURL
 $ch= curl_init();
 
 curl_setopt($ch, CURLOPT_URL, $apiUrl);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+////
+curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+curl_setopt($ch, CURLOPT_TIMEOUT, 20);
+////
 curl_setopt($ch, CURLOPT_POST, 1);
 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
 
-$authHeader ="authorization: Bearer " . trim(HUGGINGFACE_API_KEY);
-curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json', $authHeader]);
+curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json',
+    'Authorization: Bearer ' . GROQ_API_KEY]);
 
+// TEMP DEBUG
+// echo json_encode(['debug_url' => $apiUrl]); exit();
 $result = curl_exec($ch);
 $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 $curlError = curl_error($ch);
@@ -74,14 +96,15 @@ $botReplay = "Error: System Offline.";
 if ($httpCode == 200) {
     $response = json_decode($result, true);
     //Note: Hugging Face returns an array of objs
-    if (isset($response[0]['generated_text'])) {
-        $botReplay = trim($response[0]['generated_text']);
+    if (isset($response['choices'][0]['message']['content'])) {
+        $botReplay = trim($response['choices'][0]['message']['content']);
     } else {
         $botReplay = "Error: AI returned an empty response.";
     }
 } else {
     //Also a Note: Fallback for debugging
-    $botReplay = "System Error (Code: $httpCode). Please try again later.";
+   // $botReplay = "System Error (Code: $httpCode). Please try again later.";
+        $botReplay = "System Error (Code: $httpCode)." . $result;
 }
 
 //the purpose of the following if-statement is to save the AI response to the DB
