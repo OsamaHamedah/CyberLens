@@ -27,11 +27,22 @@ if ($userId) {
     $stmt->bind_param('is', $userId, $userMessage);
     $stmt->execute();
 }
-//***3. Call Hugging Face API (model: Mistral-7B-Instruct)
-$apiUrl = "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.2";
+//***3. Call Hugging Face API (model: Mistral-7B-Instruct) https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.2
+//$apiUrl = "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.3";
+//$apiUrl = "https://api-inference.huggingface.co/models/google/gemma-7b-it";
+//$apiUrl = "https://api-inference.huggingface.co/models/microsoft/Phi-3-mini-4k-instruct";
+$apiUrl="https://api-inference.huggingface.co/models/tiiuae/falcon-7b-instruct";
+$authHeader = "Authorization: Bearer " . trim(HUGGINGFACE_API_KEY);
+
+/* curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    'Content-Type: application/json',
+    $authHeader
+]); */
 
 //AI behavior
-$prompt = "<s>[INST] You Are Kali, an elite cybersecurity AI assistant for the Cyber Lens platform. You are helpful but strictly focused on cybersecurity, ethical hacking, and network defense. Keep answers technical, concise, professional, and match the user's enrergy. Answer questions unrelated to cybersecrity but remind the user that you are professionl cybersecurity assistant. \n\nUser Question: ". $userMessage . " [/INST]";
+//$prompt = "<s>[INST] You Are Kali, an elite cybersecurity AI assistant for the Cyber Lens platform. You are helpful but strictly focused on cybersecurity, ethical hacking, and network defense. Keep answers technical, concise, professional, and match the user's enrergy. Answer questions unrelated to cybersecrity but remind the user that you are professionl cybersecurity assistant. \n\nUser Question: ". $userMessage . " [/INST]";
+$prompt = "You are Kali, an elite cybersecurity AI assistant. Be technical and concise. Question: " . $userMessage . "\nAnswer:";
+
 
 $data = [
    'inputs' => $prompt,
@@ -43,11 +54,14 @@ $data = [
 ];
 //initialize cURL
 $ch= curl_init();
+
 curl_setopt($ch, CURLOPT_URL, $apiUrl);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 curl_setopt($ch, CURLOPT_POST, 1);
 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json', 'Authorization: Bearer ' . HUGGINGFACE_API_KEY]);
+
+$authHeader ="authorization: Bearer " . trim(HUGGINGFACE_API_KEY);
+curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json', $authHeader]);
 
 $result = curl_exec($ch);
 $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);

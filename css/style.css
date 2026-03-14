@@ -389,3 +389,6 @@ textarea.comment-input {
     font-family: inherit;
     box-sizing: border-box;
 }
+
+/*  AI Chat style will be implemented internally in components/chat_widget.php
+for ease of future updates and debugging purposes */

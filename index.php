@@ -127,6 +127,7 @@ $role = isset($_SESSION['user_role']) ? $_SESSION['user_role'] : 'guest';
     });
 });
 </script>
+<?php include 'views/components/chat_widget.php'; ?>
 </body>
 </html>
 
