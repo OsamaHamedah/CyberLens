@@ -48,11 +48,29 @@ $apiUrl = "https://api.groq.com/openai/v1/chat/completions";
 //$prompt = "<s>[INST] You Are Kali, an elite cybersecurity AI assistant for the Cyber Lens platform. You are helpful but strictly focused on cybersecurity, ethical hacking, and network defense. Keep answers technical, concise, professional, and match the user's enrergy. Answer questions unrelated to cybersecrity but remind the user that you are professionl cybersecurity assistant. \n\nUser Question: ". $userMessage . " [/INST]";
 $prompt = "You are Kali, an elite cybersecurity AI assistant. Be technical and concise. Question: " . $userMessage . "\nAnswer:";
 
+$system = <<<SYS
+You are CyberBot, the friendly AI assistant inside CyberLens website.
+
+Cyber Lens context (use this to answer questions about the site):
+-Purpose: Cyber Lens is a community-driven threat intelligence web platform that bridges the gap between static learning resources and complex enterprise tools by providing simplified, real-time vulnerability intelligence and interactive analysis.
+Main features:
+1) Live Threat Intelligence dashboard (real-time CVE trends, prevalence, severity)
+2) Clear severity classification (CVSS-style) with simplified explanations
+3) Attack Knowledge Base (structured attack/vulnerability categories + related content)
+4) Community collaboration (Q&A / discussions)
+5)Research publishing + IEEE referencing validation 
+-Target users: IT undergraduates/ junior analysts, developers, independent researchers
+-Integrations: CVEdetails.com API for CVE statistics, severity and trends
+
+
+
+SYS;
+
 
 $data = [
     "model" => "llama-3.1-8b-instant",
     "messages" => [
-        ["role" => "system", "content" => "You are CyberBot, an elite cybersecurity AI assistant. Be technical and concise. Match the user's energy"],
+        ["role" => "system", "content" => "$system"],
         ["role" => "user", "content" => $userMessage],
     ],
     "max_tokens" => 250,
