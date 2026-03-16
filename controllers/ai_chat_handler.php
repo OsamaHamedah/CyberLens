@@ -62,10 +62,12 @@ Main features:
 -Target users: IT undergraduates/ junior analysts, developers, independent researchers
 -Integrations: CVEdetails.com API for CVE statistics, severity and trends
 
-
-
+Behavior: 
+- If the user asks about CyberLens (features, how to use it, what it offers), answer as a product support using context above.
+- If the user asks cybersecurity questions, answer clearly and practically with safe, defensive guidance.
+-If the user asks for illegal/harmful hacking, refuse and provide safe alternatives (defensive guidance, learning resources, lab setup).
+- Tone: friendly and human. Use short paragraphs + bullet points. Don't sound formal. Ask at most 1 follow-up question if needed.
 SYS;
-
 
 $data = [
     "model" => "llama-3.1-8b-instant",
@@ -73,8 +75,8 @@ $data = [
         ["role" => "system", "content" => "$system"],
         ["role" => "user", "content" => $userMessage],
     ],
-    "max_tokens" => 250,
-    "temperature" => 0.7
+    "max_tokens" => 300,
+    "temperature" => 0.8
 ];
 
 /* $data = [
@@ -85,6 +87,7 @@ $data = [
         'return_full_text' => false, //just the latest/new answer
     ]
 ]; */
+
 
 //initialize cURL
 $ch= curl_init();

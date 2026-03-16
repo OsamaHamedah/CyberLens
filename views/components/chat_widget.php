@@ -4,15 +4,26 @@
 <button id="ai-chat-trigger" onclick="toggleChat()" title="Chat with CyberLens Bot">🤖</button>
 
 <div id ="AI-chat-window">
+
     <div class="chat-header">
         <span>🤖 CyberLens Bot</span>
         <button onclick="toggleChat()" class="close-btn" style="background: none; border: none; color: white; cursor: pointer; font-size: 1.2em;">
             &times;
         </button>
     </div>
+<!-- this is for possible future updates (fullscreen UI for the AI Chat)
+
+    <div class="chat-header">
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <button onclick="toggleFullscreen()" class="fs-btn" title="Fullscreen" style="background: none; border: none; color: white; cursor: pointer; font-size: 1.2em;">
+                &times;
+            </button>
+        </div> -->
+
     <div id = "chat-messages">
         <div class="message bot-message">
-            System Online. Ready to assist you!
+           <!-- System Online. Ready to assist you! -->
+            Hi there! How can I assist you today?
         </div>
     </div>
 
