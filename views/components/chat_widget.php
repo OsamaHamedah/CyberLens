@@ -158,13 +158,16 @@
 <script>
     function toggleChat() {
         const chat = document.getElementById('AI-chat-window');
+        const btn = document.getElementById('ai-chat-trigger');
+
         if (chat.style.display === 'flex') {
             chat.style.display = 'none';
-            btn.style.display = 'flex';
+            if (btn) btn.style.display = 'flex';
+            //btn.style.display = 'flex';
         } else {
             chat.style.display = 'flex';
-            btn.style.display = 'none';
-            setTimeout(() => document.getElementById('user-input').focus(), 100);
+            if (btn) btn.style.display = 'none';
+            setTimeout(() => document.getElementById('user-input')?.focus(), 100);
         }
     }
     function handleEnter(e) {

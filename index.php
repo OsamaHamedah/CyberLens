@@ -96,6 +96,14 @@ $role = isset($_SESSION['user_role']) ? $_SESSION['user_role'] : 'guest';
 </div>
 
 <script>
+    /*
+    function explainCVE(cveId) {
+        const chat= document.getElementById('AI-chat-window');
+        if (chat && chat.style.display !== 'flex') {
+            toggleChat();
+        }
+    }
+    */
     document.addEventListener('DOMContentLoaded', function () {
         fetch('controllers/feed.php')
             .then(response => response.json())
