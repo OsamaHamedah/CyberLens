@@ -27,8 +27,12 @@ if ($userId <= 0 || $title === '' || $body === '') {
 
 /** * @var mysqli $conn */
 $stmt = $conn->prepare("INSERT INTO community_posts (user_id, title, body) VALUES (?, ?, ?)");
+if (!$stmt) {
+    header("Location: ../views/community.php?err=db");
+    exit();
+}
 $stmt->bind_param("iss", $userId, $title, $body);
 $stmt->execute();
 
-header("Location:../views/community.php?ok=posted");
+header("Location: ../views/community.php?ok=posted");
 exit();
