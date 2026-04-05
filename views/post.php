@@ -9,9 +9,9 @@ if ($postId <= 0) {
     header("Location: community.php");
     exit();
 }
-
+/* In the following SQL query, I mistakenly mismatched the full_name from the DB with user_name so I used: // COALESCE(existing) AS mismatched // to correctly contact the DB. */
 $sqlPost = "
-SELECT p.post_id, p.title, p.body, p.created_at, p.user_id, p.accepted_comment_id, u.user_name, (SELECT COALESCE(SUM(v.vote),0) 
+SELECT p.post_id, p.title, p.body, p.created_at, p.user_id, p.accepted_comment_id, COALESCE(u.full_name, u.email) AS user_name, (SELECT COALESCE(SUM(v.vote),0) 
 FROM community_votes v WHERE v.target_type='post' AND v.target_id=p.post_id) AS score FROM community_posts p
 JOIN users u ON u.user_id = p.user_id WHERE p.post_id=? LIMIT 1
 ";
@@ -32,7 +32,8 @@ if (!$post) {
 $acceptedId = $post['accepted_comment_id'] ? intval($post['accepted_comment_id']) : 0;
 //to be continued (load Comments + Score)
 
-$sqlComments = "SELECT c.comment_id, c.body, c.created_at, c.user_id, u.user_name, (SELECT COALESCE(SUM(v.vote),0)
+/* In the following SQL query, I mistakenly mismatched the full_name from the DB with user_name so I used: // COALESCE(existing) AS mismatched // to correctly contact the DB. */
+$sqlComments = "SELECT c.comment_id, c.body, c.created_at, c.user_id, COALESCE(u.full_name, u.email) AS user_name, (SELECT COALESCE(SUM(v.vote),0)
 FROM community_votes v
 WHERE v.target_type='comment' AND v.target_id=c.comment_id) AS score
 FROM community_comments c JOIN users u ON u.user_id = c.user_id
