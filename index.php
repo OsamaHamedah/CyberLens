@@ -78,6 +78,15 @@ $role = isset($_SESSION['user_role']) ? $_SESSION['user_role'] : 'guest';
     <?php endif; ?>
     </div>
 
+    <!-- UX improvements to match the previous button style="background-color: #162447; color: #efc07b; border-color: #1f4068;"> -->
+    <!-- Community Feature's button -->
+    <div style="margin: 10px 0; text-align: right;">
+        <a href="views/community.php" class="guest-btn"
+        style="background-color: #e94560; color: white; border-color: #efc07b;">
+            Cyber Lens Community
+        </a>
+    </div>
+
     <div id="live-threat-dashboard" class = "api_container">
         <div style="display:flex; justify-content:space-between; align-items: center; margin-bottom: 20px;">
         <h3 style="margin:0; color:#fff;">🔴 Live Threat Intelligence</h3>

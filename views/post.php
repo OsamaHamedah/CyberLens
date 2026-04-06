@@ -137,7 +137,7 @@ $comments = $stmt->get_result();
     <form Method="POST" action="../controllers/community_add_comment.php">
         <input type="hidden" name="post_id" value="<?php echo intval($postId); ?>">
         <textarea name="body" rows="5" placeholder="Write your answer..."
-                  style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #1f4068; background: #0f3460; color: #fff;"></textarea>
+                  style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #1f4068; background: #0f3460; color: #fff; box-sizing: border-box;"></textarea>
 
         <button type="submit" class="guest-btn" style="background: #e94560; color:#fff; border-color: #efc07b; width: auto; margin-top: 10px;">
             Submit Answer
