@@ -75,6 +75,24 @@ $comments = $stmt->get_result();
 
         <p style="color: #ddd; margin-top: 12px; white-space:pre-wrap;"> <?php echo htmlspecialchars($post['body']); ?></p>
 
+        <!-- Report & Delete buttons for the Post -->
+        <div style="margin-top: 15px; text-align: right;">
+            <?php if ($isAuth): ?>
+            <form action="../controllers/report_handler.php" method="POST" style="display: inline;">
+                <input type="hidden" name="target_type" value="community_post">
+                <input type="hidden" name="target_id" value="<?php echo intval($postId); ?>">
+                <button type="submit" name="report_btn" style="background: none; border:none; color: #ff4d4d; cursor: pointer; font-size: 0.85em;">🚩 Report Post</button>
+            </form>
+            <?php endif; ?>
+            <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin'): ?>
+            <form action="../controllers/admin_delete.php" method="POST" style="display: inline; margin-left: 15px;">
+            <input type="hidden" name="target_type" value="community_post">
+                <input type="hidden" name="target_id" value="<?php echo intval($postId); ?>">
+                <button type="submit" name="delete_btn" onclick="return confirm('Admin: Delete this post?');" style="background: none; border: none; cursor: pointer; font-size: 0.85em; font-weight: bold;">🗑️[Admin] Delete Post</button>
+            </form>
+            <?php endif; ?>
+        </div>
+
         <!-- post's votes -->
         <div style="display: flex; align-items: center; gap:10px; margin-top: 10px;">
             <button onclick="vote('post', <?php echo intval($postId); ?>, 1)"
