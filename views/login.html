@@ -15,6 +15,11 @@
         <input type="email" name="email" placeholder="Email Address" required aria-label="Email Address">
         <input type="password" name="password" placeholder="Password" required aria-label="Password">
 
+        <div style="margin-bottom: 15px; text-align: left; display: flex; align-items: center; gap: 8px;">
+        <input type="checkbox" name="is_admin" id="is_admin" style="width: auto; margin: 0;">
+            <label for="is_admin" style="color: #efc07b; font-size: 0.9em; cursor: pointer;">Login as Administrator</label>
+        </div>
+
         <button type="submit" name="login_btn">Login</button>
         <a href="../index.php?guest=true" class="guest-btn">Continue as Guest</a>
     </form>

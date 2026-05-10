@@ -19,6 +19,14 @@ if (isset($_POST['login_btn'])) {
         $hashed_password_from_db = $row['password'];
 
         if (password_verify($password, $hashed_password_from_db)) {
+
+            $is_admin_checked = isset($_POST['is_admin']);
+            $user_role = $row["role"];
+
+            if ($is_admin_checked && $user_role !== "admin") {
+                echo "<script>alert('Access denied: You do not have the permission to access this page.'); window.location.href ='../views/login.html';</script>";
+            }
+
             $_SESSION['auth'] = TRUE;
             $_SESSION['user_id'] = $row['user_id'];
             $_SESSION['user_name'] = $row['full_name'];
