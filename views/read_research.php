@@ -85,6 +85,24 @@ while ($row = $comments_result->fetch_assoc()) {
         <?php echo nl2br(htmlspecialchars($paper['content'])); ?>
     </div>
 
+        <!-- Report & Delete features for Researches -->
+        <div style="margin-top: 15px; text-align: right;">
+            <?php if(isset($_SESSION['auth']) && $_SESSION['auth'] === true): ?>
+            <form action="../controllers/report_handler.php" method="POST" style="display: inline;">
+                <input type="hidden" name="target_type" value="research">
+                <input type="hidden" name="target_id" value = "<?php echo intval($id); ?>">
+                <button type="submit" name="report_btn" style="background: none; border: none; color: #ff4d4d; cursor: pointer; font-size: 0.85em;">🚩 Report Research</button>
+            </form>
+            <?php endif; ?>
+            <?php if(isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin'): ?>
+            <form action="../controllers/admin_delete.php" method="POST" style="display: inline; margin-left: 15px;">
+                <input type="hidden" name="target_type" value="research">
+                <input type="hidden" name="target_id" value = "<?php echo intval($id); ?>">
+                <button type="submit" name="delete_btn" onclick="return confirm('Admin: Delete this research?');" style="background: none; border: none; color: #ff4d4d; cursor: pointer; font-weight: bold;">🗑️ [Admin] Delete</button>
+            </form>
+            <?php endif; ?>
+        </div>
+
 <div class ="comments-section" id="comments">
     <h3>Discussion (<?php echo $comments_result->num_rows; ?>)</h3>
 
@@ -113,6 +131,24 @@ while ($row = $comments_result->fetch_assoc()) {
         <?php if(isset($_SESSION['auth'])): ?>
         <button class="reply-btn" onclick="toggleReply('reply-form-<?php echo $comment['comment_id']; ?>')">↩ Reply</button>
 
+            <!-- Report & Delete features for comments -->
+            <span style="margin-left: 10px;">
+                <!-- <?php if(isset($_SESSION['auth']) && $_SESSION['auth'] === true): ?> -->
+                    <form action="../controllers/report_handler.php" method="POST" style="display: inline;">
+                        <input type="hidden" name="target_type" value="research_comment">
+                        <input type="hidden" name="target_id" value = "<?php echo intval($comment['comment_id']); ?>">
+                        <button type="submit" name="report_btn" style="background: none; border: none; color: #ff4d4d; cursor: pointer; font-size: 0.8em;">🚩 Report</button>
+                    </form>
+                <?php endif; ?>
+                <?php if(isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin'): ?>
+                    <form action="../controllers/admin_delete.php" method="POST" style="display: inline; margin-left: 5px;">
+                        <input type="hidden" name="target_type" value="research_comment">
+                        <input type="hidden" name="target_id" value = "<?php echo intval($comment['comment_id']); ?>">
+                        <button type="submit" name="delete_btn" onclick="return confirm('Admin: Delete this comment?');" style="background: none; border: none; color: #ff4d4d; cursor: pointer; font-weight: bold;">🗑️ Delete</button>
+                    </form>
+                <?php endif; ?>
+            </span>
+
         <div id="reply-form-<?php echo $comment['comment_id']; ?>" class="reply-form-container" style="display: none;">
             <form action="../controllers/submit_comment.php" method="POST">
                 <input type="hidden" name="research_id" value="<?php echo $id; ?>">
@@ -132,6 +168,23 @@ while ($row = $comments_result->fetch_assoc()) {
             </div>
             <div class="comment-text">
                 <?php echo nl2br(htmlspecialchars($reply['comment_text'])); ?>
+            </div>
+            <!-- Report & Delete features for Replies -->
+            <div style="margin-top: 5px;">
+                <?php if(isset($_SESSION['auth'])): ?>
+                    <form action="../controllers/report_handler.php" method="POST" style="display: inline;">
+                        <input type="hidden" name="target_type" value="research_comment">
+                        <input type="hidden" name="target_id" value = "<?php echo intval($reply['comment_id']); ?>">
+                        <button type="submit" name="report_btn" style="background: none; border: none; color: #ff4d4d; cursor: pointer; font-size: 0.85em;">🚩 Report</button>
+                    </form>
+                <?php endif; ?>
+                <?php if(isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin'): ?>
+                    <form action="../controllers/admin_delete.php" method="POST" style="display: inline; margin-left: 5px;">
+                        <input type="hidden" name="target_type" value="research">
+                        <input type="hidden" name="target_id" value = "<?php echo intval($reply['comment_id']); ?>">
+                        <button type="submit" name="delete_btn" onclick="return confirm('Admin: Delete this reply?');" style="background: none; border: none; color: #ff4d4d; cursor: pointer; font-weight: bold;">🗑️ [Admin] Delete</button>
+                    </form>
+                <?php endif; ?>
             </div>
 </div>
        <?php endforeach; ?>

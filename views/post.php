@@ -126,6 +126,29 @@ $comments = $stmt->get_result();
             </div>
 
             <p style="color: #ddd; margin-top: 10px; white-space: pre-wrap;"><?php echo htmlspecialchars($c['body']);?></p>
+
+
+            <!-- New Added Feature to the comments: Report (for the users) & Delete (for the admin) -->
+            <div style="margin-top: 5px; text-align: right;">
+                <?php if($isAuth): ?>
+                <form action="../controllers/report_handler.php" method="POST" style="display: inline;">
+                    <input type="hidden" name="target_type" value="community_comment">
+                    <input type="hidden" name="target_id" value="<?php echo intval($c['comment_id']); ?>">
+                    <button type="submit" name="report_btn" style="background: none; color: #ff4d4d; cursor: pointer; font-size: 0.8em;">🚩 Report</button>
+                </form>
+                <?php endif; ?>
+
+                <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin'): ?>
+                <form action="../controllers/admin_delete.php" method="POST" style="display: inline;">
+                    <input type="hidden" name="target_type" value="community_comment">
+                    <input type="hidden" name="target_id" value="<?php echo intval($c['comment_id']); ?>">
+                    <button type="submit" name="delete_btn" onclick="return confirm('Admin: Delete this comment?');" style="background: none; border: none; color: #e94560; cursor: pointer; font-size: 0.8em; font-weight: bold;">🗑️ Delete</button>
+                </form>
+
+                <?php endif;?>
+            </div>
+
+
             <button onclick="vote('comment', <?php echo intval($c['comment_id']); ?>, 1)"
                     style="background: #0f3460; border:1px solid #efc07b; color: #efc07b; padding: 6px 10px; border-radius: 6px; cursor: pointer;">▲</button>
             <span id="score-comment-<?php echo intval($c['comment_id']); ?>" style="color:#fff;">
