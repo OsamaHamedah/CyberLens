@@ -44,7 +44,7 @@ $role = isset($_SESSION['user_role']) ? $_SESSION['user_role'] : 'guest';
 </head>
 <body>
 <div class="dashboard-header">
-<h2 style="margin: 0; color: #e94560;">Cyber Lens</h2>
+<h2 style="margin: 0; color: #e94560;">Cyber Library</h2>
 
 <div class="user-controls">
     <span class="welcome-text">Welcome, <strong><?php echo htmlspecialchars($name); ?></strong></span>
@@ -73,7 +73,7 @@ $role = isset($_SESSION['user_role']) ? $_SESSION['user_role'] : 'guest';
     <!-- This one is for the guest users (CTA) -->
     <span style="color: #ccc; margin-right: 10px;">Want to contribute?</span>
     <a href="views/register.html" class="guest-btn" style="background-color: #e94560; color: white; border-color: #efc07b;">
-        Join Our Community!
+        Sign In/Up to upload your own research!
     </a>
     <?php endif; ?>
     </div>
@@ -83,7 +83,7 @@ $role = isset($_SESSION['user_role']) ? $_SESSION['user_role'] : 'guest';
     <div style="margin: 10px 0; text-align: right;">
         <a href="views/community.php" class="guest-btn"
         style="background-color: #e94560; color: white; border-color: #efc07b;">
-            Cyber Lens Community
+            Cyber Library Community
         </a>
     </div>
 

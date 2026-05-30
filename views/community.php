@@ -83,7 +83,7 @@ $posts = $stmt->get_result();
 </head>
 <body>
 <div class="dashboard-header">
-    <h2 style="margin:0; color:#e94560;">Cyber Lens Community</h2>
+    <h2 style="margin:0; color:#e94560;">Cyber Library Community</h2>
     <div class="user-controls">
         <a href="../index.php" class="login-link">← Dashboard</a>
     </div>
