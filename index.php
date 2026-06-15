@@ -46,15 +46,19 @@ $role = isset($_SESSION['user_role']) ? $_SESSION['user_role'] : 'guest';
 <div class="dashboard-header">
 <h2 style="margin: 0; color: #e94560;">Cyber Library</h2>
 
-<div class="user-controls">
-    <span class="welcome-text">Welcome, <strong><?php echo htmlspecialchars($name); ?></strong></span>
-    &nbsp; | &nbsp;
-    <?php if($role ==='guest'): ?>
-        <a href="views/login.html" class="login-link">Login / Sign Up</a>
-    <?php else: ?>
-        <a href="controllers/logout.php" class="logout-btn">Logout</a>
-    <?php endif; ?>
-</div>
+    <div class="user-controls">
+        <span class="welcome-text">Welcome, <strong><?php echo htmlspecialchars($name); ?></strong></span>
+        &nbsp; | &nbsp;
+        <?php if($role ==='guest'): ?>
+            <a href="views/login.html" class="login-link">Login / Sign Up</a>
+        <?php else: ?>
+            <?php if($role === 'admin'): ?>
+                <a href="views/admin_dashboard.php" class="login-link" style="background-color: #00ff00; color: #0a0a0a; font-weight: bold; border: 2px solid #00ff00;">⚙ ADMIN</a>
+                &nbsp; | &nbsp;
+            <?php endif; ?>
+            <a href="controllers/logout.php" class="logout-btn">Logout</a>
+        <?php endif; ?>
+    </div>
 </div>
 
 <div class="main-wrapper">

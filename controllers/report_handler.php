@@ -8,7 +8,7 @@ if (!isset($_SESSION['auth']) || $_SESSION['auth'] !== true) {
 }
 
 if (isset($_POST['report_btn'])) {
-    $report_id = $_SESSION['user_id'];
+    $reporter_id = $_SESSION['user_id'];
     $target_type = $_POST['target_type']; // to match it with community_post , community_comment , etc....
     $target_id = $_POST['target_id'];
 

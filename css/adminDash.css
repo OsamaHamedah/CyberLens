@@ -1,0 +1,315 @@
+body {
+    background-color:#0a0a0a;
+    color: #00ff00;
+    font-family: 'Courier New', monospace;
+}
+
+
+.admin-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.admin-header {
+    border: 2px solid #00ff00;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #0f0f0f;
+    border-radius: 4px;
+}
+
+.admin-header h1 {
+    margin: 0;
+    color: #00ff00;
+    font-size: 2em;
+    text-shadow: 0 0 10px #00ff00;
+}
+
+.admin-header p {
+    margin: 5px 0 0 0;
+    color: #00aa00;
+    font-size: 0.9em;
+}
+
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #00ff00;
+    padding-bottom: 10px;
+}
+
+.tab-btn {
+    background: none;
+    border: 2px solid #00ff00;
+    color: #00ff00;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+    font-size: 1em;
+    transition: all 0.3s;
+    border-radius: 4px;
+}
+
+.tab-btn:hover {
+    background-color: #00ff00;
+    color: #0a0a0a;
+    box-shadow: 0 0 10px #00ff00;
+}
+
+.tab-btn.active {
+    background-color: #00ff00;
+    color: #0a0a0a;
+    box-shadow: 0 0 15px #00ff00;
+}
+
+.stats {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.stat-box {
+    border: 2px solid #00ff00;
+    padding: 15px;
+    background-color: #0f0f0f;
+    border-radius: 4px;
+    flex: 1;
+}
+
+.stat-box h3 {
+    margin: 0 0 10px 0;
+    color: #00aa00;
+    font-size: 0.9em;
+}
+
+.stat-number {
+    font-size: 2em;
+    color: #00ff00;
+    font-weight: bold;
+    text-shadow: 0 0 10px #00ff00;
+}
+
+.report-item {
+    border: 2px solid #00ff00;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #0f0f0f;
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+
+.report-item:hover {
+    box-shadow: 0 0 10px #00ff00;
+    border-color: #00ff00;
+}
+
+.report-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #00ff00;
+    padding-bottom: 10px;
+}
+
+.report-id {
+    color: #00ff00;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.report-date {
+    color: #00aa00;
+    font-size: 0.85em;
+}
+
+.report-info {
+    color: #00ff00;
+    margin: 8px 0;
+    font-size: 0.95em;
+}
+
+.report-label {
+    color: #00aa00;
+    font-weight: bold;
+}
+
+.report-value {
+    color: #00ff00;
+}
+
+.report-reason {
+    background-color: #1a1a1a;
+    border-left: 2px solid #00ff00;
+    padding: 10px;
+    margin: 10px 0;
+    color: #00ff00;
+    border-radius: 2px;
+    font-style: italic;
+}
+
+.report-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.action-btn {
+    border: 1px solid #00ff00;
+    background: none;
+    color: #00ff00;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+    transition: all 0.3s;
+    border-radius: 4px;
+}
+
+.action-btn:hover {
+    background-color: #00ff00;
+    color: #0a0a0a;
+    box-shadow: 0 0 8px #00ff00;
+}
+
+.action-btn.remove {
+    border-color: #ff4444;
+    color: #ff4444;
+}
+
+.action-btn.remove:hover {
+    background-color: #ff4444;
+    color: #0a0a0a;
+    box-shadow: 0 0 8px #ff4444;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #00ff00;
+}
+
+.checkbox-group label {
+    color: #00ff00;
+    cursor: pointer;
+    user-select: none;
+}
+
+.no-reports {
+    border: 2px dashed #00ff00;
+    padding: 40px;
+    text-align: center;
+    color: #00aa00;
+    border-radius: 4px;
+    font-size: 1.1em;
+}
+
+.back-btn {
+    display: inline-block;
+    border: 2px solid #00ff00;
+    background: none;
+    color: #00ff00;
+    padding: 10px 20px;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+    font-size: 1em;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+
+.back-btn:hover {
+    background-color: #00ff00;
+    color: #0a0a0a;
+    box-shadow: 0 0 10px #00ff00;
+}
+
+.review-link {
+    color: #00ff00;
+    text-decoration: none;
+    border-bottom: 1px solid #00ff00;
+    transition: all 0.3s;
+}
+
+.review-link:hover {
+    text-decoration: none;
+    box-shadow: 0 0 5px #00ff00;
+}
+
+/* Review Page Specific Styles */
+
+.review-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.review-header {
+    border: 2px solid #00ff00;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #0f0f0f;
+    border-radius: 4px;
+}
+
+.review-header h1 {
+    margin: 0;
+    color: #00ff00;
+    text-shadow: 0 0 10px #00ff00;
+}
+
+.section {
+    border: 2px solid #00ff00;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #0f0f0f;
+    border-radius: 4px;
+}
+
+.section h2 {
+    margin: 0 0 15px 0;
+    color: #00ff00;
+    font-size: 1.1em;
+    text-transform: uppercase;
+}
+
+.info-row {
+    margin: 8px 0;
+    color: #00ff00;
+}
+
+.content-box {
+    background-color: #1a1a1a;
+    border-left: 2px solid #00ff00;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 2px;
+    color: #00ff00;
+    line-height: 1.6;
+}
+
+.title {
+    color: #00ff00;
+    font-weight: bold;
+    font-size: 1.2em;
+    margin: 5px 0;
+}
+
+.meta {
+    color: #00aa00;
+    font-size: 0.9em;
+    margin: 5px 0;
+}
