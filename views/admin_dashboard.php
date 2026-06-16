@@ -160,7 +160,8 @@ $solved_count = $conn->query("SELECT COUNT(*) as count FROM reports WHERE is_sol
                 </div>
 
                 <div class="report-actions">
-                    <a href="admin_review_report.php?id=<?php echo $report['report_id']; ?>" class="action-btn">
+                    <!--<a href="admin_review_report.php?id=<?php echo $report['report_id']; ?>" class="action-btn"> -->
+                    <a href="admin_review_report.php?report_id=<?php echo $report['report_id']; ?>" class="action-btn">
                         📄 REVIEW CONTENT
                     </a>
 

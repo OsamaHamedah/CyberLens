@@ -16,9 +16,14 @@ if($report_id <= 0){
     exit();
 }
 
-$report = $conn->query("SELECT r.*, u.full_name as report_name
+/**
+ * $report = $conn->query("SELECT r.*, u.full_name as report_name
                                FROM reports r LEFT JOIN users u ON r.report_user_id = u.user_id
                                WHERE r.report_id = $report_id ")->fetch_assoc();
+ **/
+$report = $conn->query("SELECT r.*, u.full_name as reporter_name
+    FROM reports r LEFT JOIN users u ON r.reporter_user_id = u.user_id
+    WHERE r.report_id = $report_id")->fetch_assoc();
 
 if (!$report) {
     header('Location: admin_dashboard.php');
